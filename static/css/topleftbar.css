@@ -1,0 +1,42 @@
+.topLeftSideBar {
+    display: grid;
+    grid-template-columns: 55px 1px 1fr 1fr;
+    align-items: center;
+}
+
+#collapseButton {
+    justify-self: center;
+    height: 32px;
+    grid-column: 1/2;
+}
+
+.searchContainer {
+    display: flex;
+    grid-column: 4/5;
+    align-self: center;
+    justify-content: right;
+    padding-right: 10px;
+}
+
+.Container.collapsed {
+    grid-template-columns: 55px 1px 0px 1px 1fr;
+}
+
+#search-icon {
+    height: 32px;
+    align-self: right;
+    margin-left: 6px;
+    justify-self: right;
+}
+
+#logo {
+    height: 40px;
+    justify-self: center;
+    align-self: center;
+}
+
+#logoName {
+    padding-left: 10px;
+    font-weight: 700;
+    text-decoration: none;
+}

@@ -1,0 +1,16 @@
+.topBar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+    padding-right: 5px;
+    gap: 13px;
+}
+
+#profilePic {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    overflow: hidden; 
+    border-radius: 50%;
+}

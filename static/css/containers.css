@@ -1,0 +1,57 @@
+.Container {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 55px 1px 340px 2px 1fr;
+    grid-template-rows: 55px 1px 1fr;
+    background-color: var(--left-side-color);
+    transition: grid-template-columns 0.2s ease-out; /* Добавляем анимацию */
+}
+
+.textArea {
+    background-color: var(--text-area-color);
+    grid-column: 5/6;
+    grid-row: 3/4;
+    overflow-y: scroll;
+}
+
+.leftSideBar {
+    background-color: var(--left-side-color);
+    grid-column: 1/2;
+    grid-row: 3/4;
+}
+
+.topLeftSideBar {
+    background-color: var(--top-side-color);
+    grid-column: 1/4;
+    grid-row: 1/2;
+}
+
+.topBar {
+    background-color: var(--top-side-color);
+    grid-column: 5/6;
+    grid-row: 1/2;
+}
+
+.folderMenu {
+    background-color: var(--left-side-color);
+    grid-column: 3/4;
+    grid-row: 3/4;
+}
+
+.border1 {
+    background-color: var(--border-color);
+    grid-column: 2/3;
+    grid-row: 3/4;
+}
+
+.border2 {
+    background-color: var(--border-color);
+    grid-column: 4/5;
+    grid-row: 1/4;
+}
+
+.border3 {
+    background-color: var(--border-color);
+    grid-column: 1/6;
+    grid-row: 2/3;
+}
