@@ -31,27 +31,3 @@ p {
     border-radius: 5px;
 }
 
-
-#ctxmenu {
-    position: fixed;
-    background: #181c20;
-    color: #dadada;
-    width: 300px;
-    cursor: pointer;
-    border-style: solid;
-    border-radius: 14px;
-    border-color: #3f3f3f;
-    padding: 10px 10px 10px 10px;
-    border-width: 1px;
-  }
-  
-  #ctxmenu > p {
-    padding: 6px 1rem;
-    margin:0;
-  }
-  
-  #ctxmenu > p:hover {
-    background: #292d31;;
-    color: #dadada;
-    border-radius: 6px;
-  }

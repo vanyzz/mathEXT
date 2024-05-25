@@ -2,6 +2,7 @@
 
 {% block body %}
   <div class="Container">
+
     <div class="textArea">
       <div class="textAreaTopPart" style="font-weight: bold; color: #5d636a">
         <div class="textAreaTopPartLeft">
@@ -24,6 +25,7 @@
         </div>
       </div>
     </div>
+
     <div class="leftSideBar">
       <div class="t1">
         <img class="svg-icon" id="collapseButton" src="{{ url_for('static', filename='svg/notebook-svgrepo-com(1).svg') }}" alt="collapse">
@@ -36,6 +38,7 @@
         <img class="svg-icon" src="{{ url_for('static', filename='svg/2.svg') }}" alt="settings">
       </div>
     </div>
+
     <div class="topLeftSideBar">
       <a href="/" id="logo">
         <img id="logo" src="{{ url_for('static', filename='svg/deepl-icon(1).svg') }}" alt="search">
@@ -45,11 +48,13 @@
         <img class="svg-icon" id="search-icon" src="{{ url_for('static', filename='svg/search-magnifying-glass-svgrepo-com.svg') }}" alt="search">
       </div>
     </div>
+
     <div class="topBar">
       <img class="svg-icon" id="sunIcon" src="{{ url_for('static', filename='svg/sun-svgrepo-com(1).svg')}}">
       <img class="images" id="profilePic" src="{{ url_for('static', filename='images/images.jpg')}}">
       <img class="svg-icon" id="moreIcon" src="{{ url_for('static', filename='svg/text-align-justify-svgrepo-com.svg')}}">
     </div>
+
     <div class="folderMenu">
       <div class="topPart">
         <img class="svg-icon" id="new-note" src="{{ url_for('static', filename='svg/note-edit-svgrepo-com(1).svg') }}" alt="Edit">
@@ -60,26 +65,160 @@
         <p class="bottomPartText">Список файлов:</p>
       </div>
     </div>
+
     <div class="border1"></div>
     <div class="border2"></div>
     <div class="border3"></div>
   </div>
-  <div class="AIbutton">
-  <button id="myRoundButton">
-    <img src="{{ url_for('static', filename='svg/artificial-intelligence_11271996.svg') }}" alt="AI" style="width: 100%; height: 70%; padding-top: 6px;">
-  </button>
-  <form>
-    <div id="floatingMenu" class="hidden">
-      <input type="text" id="user_input" name="user_input" placeholder="Введите мат. формулу...">
-      <input type="text" id="math_formula_result" name="math_formula_result" class="math_formula_result" value="Текст для копирования">
-      <div id="outputFormula"></div>
-      <input type="button" value="Submit" id="button">
-    </div>
-</form>
 
-    <script src="{{ url_for('static', filename='js/glowingAnimation.js') }}"></script>
-    
+  <div class="AIbutton">
+    <button id="myRoundButton">
+      <img src="{{ url_for('static', filename='svg/artificial-intelligence_11271996.svg') }}" alt="AI" style="width: 100%; height: 70%; padding-top: 6px;">
+    </button>
+    <form>
+      <div id="floatingMenu" class="hidden">
+        <input type="text" id="user_input" name="user_input" placeholder="Введите мат. формулу...">
+        <input type="text" id="math_formula_result" name="math_formula_result" class="math_formula_result" value="Текст для копирования">
+        <div id="outputFormula"></div>
+        <input type="button" value="Submit" id="button">
+      </div>
+    </form>
+      <script src="{{ url_for('static', filename='js/glowingAnimation.js') }}"></script>
   </div>
+
+  <div id="context-menu">
+    <div class="pkm-item" id="clear">Clear</div>
+    <div class="pkm-item">Copy</div>
+    <div class="pkm-item" id="cut">Cut</div>
+    <div class="pkm-item">Paste</div>
+    <div class="pkm-item">Select all</div>
+    <div class="line"></div>
+    <div class="pkm-item">Add formula</div>
+    <div class="pkm-item" id="draw-menu">Draw formula</div>
+    <div class="line"></div>
+    <div class="pkm-item" id="save">Save</div>
+    <div class="pkm-item" id="save-as">Save as</div>
+  </div>
+
+  <div id="draggable-menu" class="hidden">
+    <div class="draggable-header">
+      Drag me
+      <span class="close-button" id="close-draggable-menu">&times;</span>
+    </div>
+    <div class="draggable-content">
+      <!-- Add your menu content here -->
+      <p>Menu Content</p>
+    </div>
+    <div class="resizable-handle" id="resizable-handle"></div>
+  </div>
+
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const drawMenuButton = document.getElementById('draw-menu');
+      const draggableMenu = document.getElementById('draggable-menu');
+      const closeButton = document.getElementById('close-draggable-menu');
+      const resizableHandle = document.getElementById('resizable-handle');
+    
+      drawMenuButton.addEventListener('click', function(event) {
+        // Position the menu above the mouse cursor
+        const mouseX = event.clientX;
+        const mouseY = event.clientY;
+        draggableMenu.style.left = `${mouseX}px`;
+        draggableMenu.style.top = `${mouseY - draggableMenu.offsetHeight}px`;
+        draggableMenu.style.display = 'block';
+      });
+    
+      closeButton.addEventListener('click', function() {
+        draggableMenu.style.display = 'none';
+      });
+    
+      // Make the menu draggable
+      dragElement(draggableMenu);
+    
+      function dragElement(element) {
+        const header = element.querySelector('.draggable-header');
+        let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    
+        if (header) {
+          header.onmousedown = dragMouseDown;
+        } else {
+          element.onmousedown = dragMouseDown;
+        }
+    
+        function dragMouseDown(e) {
+          e = e || window.event;
+          e.preventDefault();
+          pos3 = e.clientX;
+          pos4 = e.clientY;
+          document.onmouseup = closeDragElement;
+          document.onmousemove = elementDrag;
+        }
+    
+        function elementDrag(e) {
+          e = e || window.event;
+          e.preventDefault();
+          pos1 = pos3 - e.clientX;
+          pos2 = pos4 - e.clientY;
+          pos3 = e.clientX;
+          pos4 = e.clientY;
+    
+          // Calculate new position
+          let newTop = element.offsetTop - pos2;
+          let newLeft = element.offsetLeft - pos1;
+    
+          // Ensure the element stays within the viewport
+          const minTop = 0;
+          const minLeft = 0;
+          const maxTop = window.innerHeight - element.offsetHeight;
+          const maxLeft = window.innerWidth - element.offsetWidth;
+    
+          if (newTop < minTop) newTop = minTop;
+          if (newLeft < minLeft) newLeft = minLeft;
+          if (newTop > maxTop) newTop = maxTop;
+          if (newLeft > maxLeft) newLeft = maxLeft;
+    
+          element.style.top = newTop + "px";
+          element.style.left = newLeft + "px";
+        }
+    
+        function closeDragElement() {
+          document.onmouseup = null;
+          document.onmousemove = null;
+        }
+      }
+    
+      // Make the menu resizable
+      resizableHandle.addEventListener('mousedown', function(e) {
+        e.preventDefault();
+        document.onmousemove = resizeElement;
+        document.onmouseup = stopResizeElement;
+      });
+    
+      function resizeElement(e) {
+        const minWidth = 150; // Минимальная ширина
+        const minHeight = 100; // Минимальная высота
+    
+        const newWidth = e.clientX - draggableMenu.offsetLeft;
+        const newHeight = e.clientY - draggableMenu.offsetTop;
+    
+        if (newWidth > minWidth) {
+          draggableMenu.style.width = newWidth + 'px';
+        }
+    
+        if (newHeight > minHeight) {
+          draggableMenu.style.height = newHeight + 'px';
+        }
+      }
+    
+      function stopResizeElement() {
+        document.onmousemove = null;
+        document.onmouseup = null;
+      }
+    });
+      </script>
+    
+
 
 {% endblock %}
   

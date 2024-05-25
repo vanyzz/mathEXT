@@ -1,0 +1,94 @@
+#context-menu {
+    background-color: var(--left-side-color);
+    box-shadow: 0 0 20px rgba(37, 40, 42, 0.22);
+    color: var(--text-color);
+    
+    width: 10em;
+    padding: 10px 12px 10px 12px;
+    font-size: 1.3rem;
+    
+    position: fixed;
+    visibility: hidden;
+
+    display: flex;
+    flex-direction: column;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: #3f3f3f;
+    border-radius: 15px !important;
+}
+
+.pkm-item {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding: 5px 9px 5px 9px;
+
+}
+
+.pkm-item:hover {
+    background-color: var(--icon-hover-color);
+    border-radius: 7px;
+    cursor: default;
+}
+
+.line {
+    background-color: #3f3f3f;
+    height: 1px;
+    width: 100%;
+    margin: 10px 0 10px 0
+}
+
+#draggable-menu {
+  position: absolute;
+  width: 200px;
+  background-color: #f1f1f1;
+  border: 1px solid #d3d3d3;
+  z-index: 1000;
+  display: none;
+}
+
+.draggable-header {
+  padding: 10px;
+  cursor: move;
+  background-color: #2196F3;
+  color: #fff;
+}
+
+.draggable-content {
+  padding: 10px;
+}
+
+.close-button {
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #fff;
+  }
+  
+  .close-button:hover {
+    color: #ff0000;
+  }
+
+  #draggable-menu {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    z-index: 1000;
+    min-width: 250px; /* Минимальная ширина */
+    min-height: 100px; /* Минимальная высота */
+    max-width: 1000px;
+    max-height: 600px;
+  }
+  
+  .resizable-handle {
+    width: 10px;
+    height: 10px;
+    background-color: #ccc;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    cursor: se-resize;
+  }

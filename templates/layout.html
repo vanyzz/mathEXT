@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/topbar.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/leftsidebar.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/themes.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/rightClickMenu.css') }}">
   <title>mathEXT</title>
 </head>
 <body>
@@ -49,5 +50,8 @@
     <!--Открытие меню при нажатии правой кнопки мыши-->
     <script src="{{ url_for('static', filename='js/rightClickAction.js') }}"></script>
 
+    <!--Функции кнопок контекстного меню `0_`0 -->
+    <script src="{{ url_for('static', filename='js/contextMenuButtons/save.js') }}"></script>
+    
 </body>
 </html>
