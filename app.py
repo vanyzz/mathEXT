@@ -1,5 +1,4 @@
-from flask import Flask, render_template, request, jsonify, redirect, url_for
-from flask_cors import CORS
+from flask import Flask, render_template, request, jsonify
 import math_formula
 
 app = Flask(__name__)
