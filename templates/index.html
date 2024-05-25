@@ -64,7 +64,6 @@
     <div class="border2"></div>
     <div class="border3"></div>
   </div>
-
   <div class="AIbutton">
   <button id="myRoundButton">
     <img src="{{ url_for('static', filename='svg/artificial-intelligence_11271996.svg') }}" alt="AI" style="width: 100%; height: 70%; padding-top: 6px;">
@@ -81,89 +80,6 @@
     <script src="{{ url_for('static', filename='js/glowingAnimation.js') }}"></script>
     
   </div>
-
-  <script>
-    $(document).ready(function() {
-        $('#button').click(function() {
-            var smallInput = $('#user_input').val();
-            $.post('/submit', {small_input: smallInput}, function(data) {
-                $('#math_formula_result').val(data.math_formula_result);
-            });
-        });
-    });
-  </script>
-
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('myForm');
-        const inputText = document.getElementById('inputText');
-
-        form.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the default form submission behavior
-
-            const formData = new FormData(form);
-            const userInput = formData.get('user_input');
-
-            // Send the user input to the server using AJAX
-            fetch('/', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(responseText => {
-                // Append the generated LaTeX formula to the input area
-                appendLaTeXFormula(responseText);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        });
-
-        // Function to append LaTeX formula to the input area
-        function appendLaTeXFormula(formula) {
-            // Ensure the input area value ends with a new line if it's not empty
-            if (inputText.value.trim() !== '') {
-                inputText.value += '\n';
-            }
-            // Append the LaTeX formula to the input area
-            inputText.value += formula;
-        }
-    });
-    </script>
-
-    <script>
-      oncontextmenu = (e) => {
-      e.preventDefault()
-      let menu = document.createElement("div")
-      menu.id = "ctxmenu"
-      menu.style = `top:${e.pageY-10}px;left:${e.pageX-40}px`
-      menu.onmouseleave = () => ctxmenu.outerHTML = ''
-      menu.innerHTML = "<p> Add formula using AI</p><p>Draw formula</p>";
-      document.body.appendChild(menu)
-    }
-    </script>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script>
-      $(document).ready(function() {
-          // Перебор каждой строки в .line-numbers
-          $('.line-numbers').html(function(index, html) {
-              return html.split('<br>').map(function(line) {
-                  // Проверка, содержит ли строка хотя бы одну цифру
-                  if (/\d/.test(line)) {
-                      // Если да, оборачиваем строку в span с классом highlight
-                      return '<span class="highlight">' + line + '</span>';
-                  } else {
-                      // Если нет, возвращаем строку без изменений
-                      return line;
-                  }
-              }).join('<br>');
-          });
-      });
-    </script>
-
 
 {% endblock %}
   
