@@ -1,0 +1,169 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <div class="Container">
+    <div class="textArea">
+      <div class="textAreaTopPart" style="font-weight: bold; color: #5d636a">
+        <div class="textAreaTopPartLeft">
+          <img class="svg-icon" id="leftArrow" src="{{ url_for('static', filename='svg/arrow-left-sm-svgrepo-com.svg') }}">
+          <img class="svg-icon" id="rightArrow" src="{{ url_for('static', filename='svg/arrow-right-sm-svgrepo-com.svg') }}">
+        </div>
+        <div class="textAreaTopPartCenter" style="color: var(--icon-color)">Текущий файл</div>
+        <div class="textAreaTopPartRight">
+          <img class="svg-icon" id="bookIcon" src="{{ url_for('static', filename='svg/book-open-svgrepo-com.svg') }}">
+          <img class="svg-icon" id="moreIcon" src="{{ url_for('static', filename='svg/more-vertical-svgrepo-com.svg') }}">
+        </div>
+      </div>
+      <div class="textAreaBottomPart">
+        <div class="line-numbers"></div>
+        <div class="input-area">
+          <textarea class="mainTextArea" id="inputText"></textarea>
+        </div>
+        <div class="output-area">
+          <div id="outputText"></div>
+        </div>
+      </div>
+    </div>
+    <div class="leftSideBar">
+      <div class="t1">
+        <img class="svg-icon" id="collapseButton" src="{{ url_for('static', filename='svg/notebook-svgrepo-com(1).svg') }}" alt="collapse">
+      </div>
+      <div class="t2"></div>
+      <div class="t3">
+        <a href="\info" id="info">
+          <img class="svg-icon" id="info" src="{{ url_for('static', filename='svg/1.svg') }}" alt="info">
+        </a>
+        <img class="svg-icon" src="{{ url_for('static', filename='svg/2.svg') }}" alt="settings">
+      </div>
+    </div>
+    <div class="topLeftSideBar">
+      <a href="/" id="logo">
+        <img id="logo" src="{{ url_for('static', filename='svg/deepl-icon(1).svg') }}" alt="search">
+      </a>
+      <a href="\" id="logoName">mathEXT</a>
+      <div class="searchContainer">
+        <img class="svg-icon" id="search-icon" src="{{ url_for('static', filename='svg/search-magnifying-glass-svgrepo-com.svg') }}" alt="search">
+      </div>
+    </div>
+    <div class="topBar">
+      <img class="svg-icon" id="sunIcon" src="{{ url_for('static', filename='svg/sun-svgrepo-com(1).svg')}}">
+      <img class="images" id="profilePic" src="{{ url_for('static', filename='images/images.jpg')}}">
+      <img class="svg-icon" id="moreIcon" src="{{ url_for('static', filename='svg/text-align-justify-svgrepo-com.svg')}}">
+    </div>
+    <div class="folderMenu">
+      <div class="topPart">
+        <img class="svg-icon" id="new-note" src="{{ url_for('static', filename='svg/note-edit-svgrepo-com(1).svg') }}" alt="Edit">
+        <img class="svg-icon" src="{{ url_for('static', filename='svg/folder-add-svgrepo-com.svg') }}" alt="Folder">
+        <script src="{{ url_for('static', filename='js/collapse.js') }}"></script>
+      </div>
+      <div class="bottomPart">
+        <p class="bottomPartText">Список файлов:</p>
+      </div>
+    </div>
+    <div class="border1"></div>
+    <div class="border2"></div>
+    <div class="border3"></div>
+  </div>
+
+  <div class="AIbutton">
+  <button id="myRoundButton">
+    <img src="{{ url_for('static', filename='svg/artificial-intelligence_11271996.svg') }}" alt="AI" style="width: 100%; height: 70%; padding-top: 6px;">
+  </button>
+  <form>
+    <div id="floatingMenu" class="hidden">
+      <input type="text" id="user_input" name="user_input" placeholder="Введите мат. формулу...">
+      <input type="text" id="math_formula_result" name="math_formula_result" class="math_formula_result" value="Текст для копирования">
+      <div id="outputFormula"></div>
+      <input type="button" value="Submit" id="button">
+    </div>
+</form>
+
+    <script src="{{ url_for('static', filename='js/glowingAnimation.js') }}"></script>
+    
+  </div>
+
+  <script>
+    $(document).ready(function() {
+        $('#button').click(function() {
+            var smallInput = $('#user_input').val();
+            $.post('/submit', {small_input: smallInput}, function(data) {
+                $('#math_formula_result').val(data.math_formula_result);
+            });
+        });
+    });
+  </script>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('myForm');
+        const inputText = document.getElementById('inputText');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission behavior
+
+            const formData = new FormData(form);
+            const userInput = formData.get('user_input');
+
+            // Send the user input to the server using AJAX
+            fetch('/', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(responseText => {
+                // Append the generated LaTeX formula to the input area
+                appendLaTeXFormula(responseText);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+
+        // Function to append LaTeX formula to the input area
+        function appendLaTeXFormula(formula) {
+            // Ensure the input area value ends with a new line if it's not empty
+            if (inputText.value.trim() !== '') {
+                inputText.value += '\n';
+            }
+            // Append the LaTeX formula to the input area
+            inputText.value += formula;
+        }
+    });
+    </script>
+
+    <script>
+      oncontextmenu = (e) => {
+      e.preventDefault()
+      let menu = document.createElement("div")
+      menu.id = "ctxmenu"
+      menu.style = `top:${e.pageY-10}px;left:${e.pageX-40}px`
+      menu.onmouseleave = () => ctxmenu.outerHTML = ''
+      menu.innerHTML = "<p> Add formula using AI</p><p>Draw formula</p>";
+      document.body.appendChild(menu)
+    }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+      $(document).ready(function() {
+          // Перебор каждой строки в .line-numbers
+          $('.line-numbers').html(function(index, html) {
+              return html.split('<br>').map(function(line) {
+                  // Проверка, содержит ли строка хотя бы одну цифру
+                  if (/\d/.test(line)) {
+                      // Если да, оборачиваем строку в span с классом highlight
+                      return '<span class="highlight">' + line + '</span>';
+                  } else {
+                      // Если нет, возвращаем строку без изменений
+                      return line;
+                  }
+              }).join('<br>');
+          });
+      });
+    </script>
+
+
+{% endblock %}
+  

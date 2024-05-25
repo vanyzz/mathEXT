@@ -1,0 +1,22 @@
+.folderMenu {
+    color: white;
+    display: grid;
+    grid-template-rows: 55px 1fr;
+}
+
+.topPart {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    column-gap: 5px;
+}
+
+.bottomPart{
+    justify-content: center;
+    display: flex;
+}
+
+.bottomPartText {
+    font-weight: bold;
+    white-space: nowrap; /* Добавляем это свойство */
+}

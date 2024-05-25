@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Info</title>
+
+    <style>
+        * {
+            background-color: #1c2127;
+            color: #bec6cf;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-size: xx-large;
+            font-weight: 500;
+        }
+
+        html{
+            margin: 50px 300px 0px 300px;
+        }
+
+        p {
+            background-color: #f1f1f1;
+            color: #1c2127;
+        }
+        
+         /* Style the button that is used to open and close the collapsible content */
+        .collapsible {
+        background-color: #eee;
+        color: hsl(0, 0%, 27%);
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        }
+
+        /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+        .active, .collapsible:hover {
+        background-color: #ccc;
+        }
+
+        /* Style the collapsible content. Note: hidden by default */
+        .content {
+        padding: 0 18px;
+        display: none;
+        overflow: hidden;
+        background-color: #f1f1f1;
+        } 
+
+        #stats {
+        justify-self: center;
+
+        width: 1200px; /* Ширина изображения */
+        height: 800px; /* Высота изображения */
+        object-fit: cover; /* Обрезает изображение для заполнения контейнера, сохраняя пропорции */
+        object-position: center; /* Центрирует изображение */
+    }
+
+    @keyframes slide {
+        from {
+            transform: translateX(100%);
+        }
+        to {
+            transform: translateX(-100%);
+        }
+    }
+
+    #banana-cat {
+        margin-left: 430px;
+        animation: slide 5s linear infinite;
+    }
+    </style>
+
+</head>
+<body>
+    <h1 style="font-size: 50px;">
+        Дальнейшие планы
+    </h1>
+
+    <button type="button" class="collapsible" style="font-size: x-large; font-weight: 700;">Новый AI</button>
+    <div class="content">
+      <p>Полный переход на reka AI</p>
+      <p>Улучшение техущих и создание новых функций с помощью более быстрого и качественного AI который в теории способен работать в реальном времени</p>
+      <img class="svg-icon" id="stats" src="{{ url_for('static', filename='images/Language+eval.jpg') }}">
+    </div>
+
+    <button type="button" class="collapsible" style="font-size: x-large; font-weight: 700;">Рисование формул</button>
+    <div class="content">
+        <p>Возможность рисовать формулы прямо в браузере в реальном времени</p>
+        <p>Использование reka AI для возможности рисовать и редактировать формулы в реальном времени</p>
+        <img class="svg-icon" id="draw-preview" src="{{ url_for('static', filename='images/drawing_preview.png') }}">
+    </div>
+
+    <button type="button" class="collapsible" style="font-size: x-large; font-weight: 700;">Более красивое написание текста</button>
+    <div class="content">
+        <p>Будет добавлена синтаксическая подсветка, а также много удобных интерфейсных улучшений которые сделают набор формул в разы удобнее</p>
+        <img class="svg-icon" id="draw-preview" style="width: 100%;" src="{{ url_for('static', filename='images/syntax_preview.png') }}">
+        <img class="svg-icon" id="draw-preview" style="width: 100%;" src="{{ url_for('static', filename='images/syntax_preview2.png') }}">
+    </div>
+
+    <button type="button" class="collapsible" style="font-size: x-large; font-weight: 700;">Взаимствование идей(не воровство)</button>
+    <div class="content">
+        <p>Переделать множество функций с сайта overleaf, а также других сайтов для записи tex под свой сайт</p>
+        <p>У них опыта больше</p>
+        <img class="svg-icon" id="overleaf" style="width: 100%;" src="{{ url_for('static', filename='images/overleaf_preview.png') }}">
+    </div>
+
+    <img class="svg-icon" id="banana-cat" src="{{ url_for('static', filename='images/banana-cat-running.gif') }}">
+
+</body>
+
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+} 
+</script>
+</html>
