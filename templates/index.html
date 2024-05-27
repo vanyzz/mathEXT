@@ -32,9 +32,15 @@
       </div>
       <div class="t2"></div>
       <div class="t3">
+
+        <a href="\test" id="test">
+          <img class="svg-icon" id="info" style="justify-self: center; width: 68%;" src="{{ url_for('static', filename='svg/test.svg') }}" alt="test">
+        </a>
+        
         <a href="\info" id="info">
           <img class="svg-icon" id="info" src="{{ url_for('static', filename='svg/1.svg') }}" alt="info">
         </a>
+
         <img class="svg-icon" src="{{ url_for('static', filename='svg/2.svg') }}" alt="settings">
       </div>
     </div>
@@ -87,17 +93,17 @@
   </div>
 
   <div id="context-menu">
-    <div class="pkm-item" id="clear">Clear</div>
-    <div class="pkm-item" id="copy">Copy</div>
-    <div class="pkm-item" id="cut">Cut</div>
-    <div class="pkm-item" id="paste">Paste</div>
-    <div class="pkm-item" id="select-all">Select all</div>
+    <div class="pkm-item" id="clear"> <img class="rkm-icon" src="{{ url_for('static', filename='svg/rightClickIcons/clear.svg') }}"> Clear</div>
+    <div class="pkm-item" id="copy"> <img class="rkm-icon" src="{{ url_for('static', filename='svg/rightClickIcons/copy.svg') }}"> Copy</div>
+    <div class="pkm-item" id="cut"> <img class="rkm-icon" src="{{ url_for('static', filename='svg/rightClickIcons/cut.svg') }}"> Cut</div>
+    <div class="pkm-item" id="paste"> <img class="rkm-icon" src="{{ url_for('static', filename='svg/rightClickIcons/paste.svg') }}"> Paste</div>
+    <div class="pkm-item" id="select-all"> <img class="rkm-icon" src="{{ url_for('static', filename='svg/rightClickIcons/select-all.svg') }}"> Select all</div>
     <div class="line"></div>
-    <div class="pkm-item" id="add-formula">Add formula</div>
-    <div class="pkm-item" id="draw-menu">Draw formula</div>
+    <div class="pkm-item" id="add-formula"> <img class="rkm-bottom-icon" src="{{ url_for('static', filename='svg/rightClickIcons/add-formula.svg') }}"> Add formula</div>
+    <div class="pkm-item" id="draw-menu"> <img class="rkm-bottom-icon" src="{{ url_for('static', filename='svg/rightClickIcons/draw-menu.svg') }}"> Draw formula</div>
     <div class="line"></div>
-    <div class="pkm-item" id="save">Save</div>
-    <div class="pkm-item" id="save-as">Save as</div>
+    <div class="pkm-item" id="save"> <img class="rkm-bottom-icon" src="{{ url_for('static', filename='svg/rightClickIcons/save.svg') }}"> Save</div>
+    <div class="pkm-item" id="save-as"> <img class="rkm-bottom-icon" src="{{ url_for('static', filename='svg/rightClickIcons/save-as.svg') }}"> Save as</div>
   </div>
 
   <div id="drawingWindow" class="hidden" style="display: none;">
@@ -128,27 +134,5 @@
       <img class="images" id="cat_breakdancing_holy_fucking_shit" style="z-index: 1001; flex: 1;" src="{{ url_for('static', filename='images/breakdance-cat.gif')}}">
     </ul>
   </div>
-
-  <script>
-document.getElementById('hamburger-menu').addEventListener('click', function() {
-  var menu = document.getElementById('hamburgerMenu');
-  if (menu.classList.contains('hidden')) {
-    menu.classList.remove('hidden');
-    menu.style.display = 'flex';
-  } else {
-    menu.classList.add('hidden');
-    menu.style.display = 'none';
-  }
-});
-
-document.addEventListener('click', function(event) {
-  var menu = document.getElementById('hamburgerMenu');
-  var hamburgerButton = document.getElementById('hamburger-menu');
-  if (!menu.contains(event.target) && !hamburgerButton.contains(event.target)) {
-    menu.classList.add('hidden');
-    menu.style.display = 'none';
-  }
-});
-  </script>
 
 {% endblock %}

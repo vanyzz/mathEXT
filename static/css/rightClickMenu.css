@@ -22,7 +22,10 @@
 .pkm-item {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   padding: 5px 9px 5px 9px;
-
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  align-items: center;
 }
 
 .pkm-item:hover {
@@ -107,4 +110,16 @@
 
 .hidden {
   display: none;
+}
+
+.rkm-icon {
+  height: 30px;
+  justify-self: center;
+  align-self: center;
+}
+
+.rkm-bottom-icon {
+  height: 26px;;
+  justify-self: center;
+  align-self: center;
 }
