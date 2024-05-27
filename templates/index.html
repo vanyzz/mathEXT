@@ -50,9 +50,9 @@
     </div>
 
     <div class="topBar">
-      <img class="svg-icon" id="sunIcon" src="{{ url_for('static', filename='svg/sun-svgrepo-com(1).svg')}}">
-      <img class="images" id="profilePic" src="{{ url_for('static', filename='images/waytoodunk.gif')}}">
-      <img class="svg-icon" id="moreIcon" src="{{ url_for('static', filename='svg/text-align-justify-svgrepo-com.svg')}}">
+      <img class="svg-icon" id="sunIcon" style="z-index: 1001;" src="{{ url_for('static', filename='svg/sun-svgrepo-com(1).svg')}}">
+      <img class="images" id="profilePic" style="z-index: 1001;" src="{{ url_for('static', filename='images/waytoodunk.gif')}}">
+      <img class="svg-icon" id="hamburger-menu" src="{{ url_for('static', filename='svg/text-align-justify-svgrepo-com.svg')}}">
     </div>
 
     <div class="folderMenu">
@@ -116,5 +116,39 @@
       </div>
     </div>
   </div>
+
+  
+  <div id="hamburgerMenu" class="hidden">
+    <ul>
+      <div id="hamburger-border"></div>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact</a></li>
+      <img class="images" id="cat_breakdancing_holy_fucking_shit" style="z-index: 1001; flex: 1;" src="{{ url_for('static', filename='images/breakdance-cat.gif')}}">
+    </ul>
+  </div>
+
+  <script>
+document.getElementById('hamburger-menu').addEventListener('click', function() {
+  var menu = document.getElementById('hamburgerMenu');
+  if (menu.classList.contains('hidden')) {
+    menu.classList.remove('hidden');
+    menu.style.display = 'flex';
+  } else {
+    menu.classList.add('hidden');
+    menu.style.display = 'none';
+  }
+});
+
+document.addEventListener('click', function(event) {
+  var menu = document.getElementById('hamburgerMenu');
+  var hamburgerButton = document.getElementById('hamburger-menu');
+  if (!menu.contains(event.target) && !hamburgerButton.contains(event.target)) {
+    menu.classList.add('hidden');
+    menu.style.display = 'none';
+  }
+});
+  </script>
 
 {% endblock %}
