@@ -11,6 +11,11 @@ def index():
 def info():
     return render_template('info.html')
 
+@app.route('/test')
+def test():
+    return render_template('test.html')
+
+
 @app.route('/submit', methods=['POST'])
 def submit():
     small_input = request.form.get('small_input')
