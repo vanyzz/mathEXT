@@ -88,137 +88,33 @@
 
   <div id="context-menu">
     <div class="pkm-item" id="clear">Clear</div>
-    <div class="pkm-item">Copy</div>
+    <div class="pkm-item" id="copy">Copy</div>
     <div class="pkm-item" id="cut">Cut</div>
-    <div class="pkm-item">Paste</div>
-    <div class="pkm-item">Select all</div>
+    <div class="pkm-item" id="paste">Paste</div>
+    <div class="pkm-item" id="select-all">Select all</div>
     <div class="line"></div>
-    <div class="pkm-item">Add formula</div>
+    <div class="pkm-item" id="add-formula">Add formula</div>
     <div class="pkm-item" id="draw-menu">Draw formula</div>
     <div class="line"></div>
     <div class="pkm-item" id="save">Save</div>
     <div class="pkm-item" id="save-as">Save as</div>
   </div>
 
-  <div id="draggable-menu" class="hidden">
-    <div class="draggable-header">
-      Drag me
-      <span class="close-button" id="close-draggable-menu">&times;</span>
+  <div id="drawingWindow" class="hidden" style="display: none;">
+    <div class="drawingWindowHeader">
+      <span id="drawingWindowTitle">Draw Formula</span>
+      <span id="closeDrawingWindow">&times;</span>
     </div>
-    <div class="draggable-content">
-      <!-- Add your menu content here -->
-      <p>Menu Content</p>
+    <div class="drawingWindowBody">
+      <input type="text" id="drawingInput" style=" margin-top: 5px;" placeholder="Здесь будет формула">
+      <div id="drawingCanvas">
+        <canvas id="canvasElement" width="500" height="130"></canvas>
+      </div>
+      <div id="divandinp">
+        <button id="saveDrawing">Convert</button>
+        <button id="clearDrawing">Clear</button>
+      </div>
     </div>
-    <div class="resizable-handle" id="resizable-handle"></div>
   </div>
 
-  
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const drawMenuButton = document.getElementById('draw-menu');
-      const draggableMenu = document.getElementById('draggable-menu');
-      const closeButton = document.getElementById('close-draggable-menu');
-      const resizableHandle = document.getElementById('resizable-handle');
-    
-      drawMenuButton.addEventListener('click', function(event) {
-        // Position the menu above the mouse cursor
-        const mouseX = event.clientX;
-        const mouseY = event.clientY;
-        draggableMenu.style.left = `${mouseX}px`;
-        draggableMenu.style.top = `${mouseY - draggableMenu.offsetHeight}px`;
-        draggableMenu.style.display = 'block';
-      });
-    
-      closeButton.addEventListener('click', function() {
-        draggableMenu.style.display = 'none';
-      });
-    
-      // Make the menu draggable
-      dragElement(draggableMenu);
-    
-      function dragElement(element) {
-        const header = element.querySelector('.draggable-header');
-        let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-    
-        if (header) {
-          header.onmousedown = dragMouseDown;
-        } else {
-          element.onmousedown = dragMouseDown;
-        }
-    
-        function dragMouseDown(e) {
-          e = e || window.event;
-          e.preventDefault();
-          pos3 = e.clientX;
-          pos4 = e.clientY;
-          document.onmouseup = closeDragElement;
-          document.onmousemove = elementDrag;
-        }
-    
-        function elementDrag(e) {
-          e = e || window.event;
-          e.preventDefault();
-          pos1 = pos3 - e.clientX;
-          pos2 = pos4 - e.clientY;
-          pos3 = e.clientX;
-          pos4 = e.clientY;
-    
-          // Calculate new position
-          let newTop = element.offsetTop - pos2;
-          let newLeft = element.offsetLeft - pos1;
-    
-          // Ensure the element stays within the viewport
-          const minTop = 0;
-          const minLeft = 0;
-          const maxTop = window.innerHeight - element.offsetHeight;
-          const maxLeft = window.innerWidth - element.offsetWidth;
-    
-          if (newTop < minTop) newTop = minTop;
-          if (newLeft < minLeft) newLeft = minLeft;
-          if (newTop > maxTop) newTop = maxTop;
-          if (newLeft > maxLeft) newLeft = maxLeft;
-    
-          element.style.top = newTop + "px";
-          element.style.left = newLeft + "px";
-        }
-    
-        function closeDragElement() {
-          document.onmouseup = null;
-          document.onmousemove = null;
-        }
-      }
-    
-      // Make the menu resizable
-      resizableHandle.addEventListener('mousedown', function(e) {
-        e.preventDefault();
-        document.onmousemove = resizeElement;
-        document.onmouseup = stopResizeElement;
-      });
-    
-      function resizeElement(e) {
-        const minWidth = 150; // Минимальная ширина
-        const minHeight = 100; // Минимальная высота
-    
-        const newWidth = e.clientX - draggableMenu.offsetLeft;
-        const newHeight = e.clientY - draggableMenu.offsetTop;
-    
-        if (newWidth > minWidth) {
-          draggableMenu.style.width = newWidth + 'px';
-        }
-    
-        if (newHeight > minHeight) {
-          draggableMenu.style.height = newHeight + 'px';
-        }
-      }
-    
-      function stopResizeElement() {
-        document.onmousemove = null;
-        document.onmouseup = null;
-      }
-    });
-      </script>
-    
-
-
 {% endblock %}
-  

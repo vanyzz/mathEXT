@@ -101,3 +101,10 @@ document.addEventListener("click", function (e) {
     contextMenu.style.visibility = "hidden";
   }
 });
+
+// Close the menu when clicking any button inside it using event delegation
+contextMenu.addEventListener('click', function (e) {
+  if (e.target.tagName === 'BUTTON') {
+    contextMenu.style.visibility = "hidden";
+  }
+});

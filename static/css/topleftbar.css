@@ -39,4 +39,5 @@
     padding-left: 10px;
     font-weight: 700;
     text-decoration: none;
+    color: var(--text-color);
 }
