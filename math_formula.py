@@ -33,7 +33,7 @@ def get_math_formula(user_choice):
     url = "https://llm.api.cloud.yandex.net/foundationModels/v1/completion"
     headers = {
         "Content-Type": "application/json",
-        "Authorization": "Api-Key AQVNxKNywLFeeNlFU8Ml1bf5zkXDhsVwUEAEfkzp"
+        "Authorization": "Api-Key "
     }
 
     response = requests.post(url, headers=headers, json=prompt)
